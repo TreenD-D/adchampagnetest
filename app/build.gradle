@@ -109,19 +109,19 @@ dependencies {
     implementation 'com.github.AppCraftTeam:common-utils-android:1.0.8'
     implementation 'com.github.AppCraftTeam:pagination-utils-android:2.0.1'
     implementation 'com.github.AppCraftTeam:navigation-utils-android:2.0.2'
-    implementation 'com.github.AppCraftTeam:permissions-utils-android:1.0.2'
+    implementation 'com.github.AppCraftTeam:permissions-utils-android:2.0.0'
     implementation 'com.github.AppCraftTeam:dialog-utils-android:2.0.4'
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation "androidx.viewpager2:viewpager2:1.1.0-beta01"
-    implementation "androidx.annotation:annotation:1.2.0"
-    implementation 'androidx.fragment:fragment-ktx:1.3.6'
+    implementation "androidx.annotation:annotation:1.3.0"
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
     // MVVM
-    def lifecycleVersion = '2.4.0'
+    def lifecycleVersion = '2.4.1'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
@@ -131,12 +131,12 @@ dependencies {
     implementation "com.github.hadilq.liveevent:liveevent:1.2.0"
 
     // Coroutines
-    def coroutinesVersion = '1.5.0'
+    def coroutinesVersion = '1.5.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     // Material
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.6.0-alpha03'
 
     // Koin DI
     implementation "io.insert-koin:koin-android:$koinVersion"
@@ -155,7 +155,7 @@ dependencies {
     implementation "com.mikepenz:fastadapter-extensions-utils:$fastAdapterVersion"
 
     // Image loader
-    implementation "io.coil-kt:coil:1.1.1"
+    implementation "io.coil-kt:coil:1.4.0"
 
     // Firebase
     implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")

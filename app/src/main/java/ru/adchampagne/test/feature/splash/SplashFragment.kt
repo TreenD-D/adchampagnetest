@@ -5,9 +5,11 @@ import android.view.View
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.adchampagne.test.Screens
 import ru.adchampagne.test.databinding.FragmentSplashBinding
 import ru.adchampagne.test.global.ui.fragment.BaseFragment
 import ru.adchampagne.test.global.utils.BindingProvider
+import ru.adchampagne.test.global.utils.observe
 
 private const val ANIMATION_DURATION_MS = 3000L
 
@@ -29,13 +31,19 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         // )
 
         // Navigate to the next screen
-        // navigation.newRootFlow(Screens.Flow.navigation())
+        navigation.newRootFlow(Screens.Flow.auth())
     }
 
     private fun startFirstAnimation() {
         viewScope.launch {
             delay(ANIMATION_DURATION_MS)
-            viewModel.onAnimationEnd()
+            observe(viewModel.authStateLiveData) { isLoggedIn ->
+                if (isLoggedIn) {
+                    navigation.newRootFlow(Screens.Flow.profile())
+                } else {
+                    navigation.newRootFlow(Screens.Flow.auth())
+                }
+            }
         }
     }
 }

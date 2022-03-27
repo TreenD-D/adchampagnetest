@@ -10,10 +10,10 @@ import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory
-import org.koin.core.KoinExperimentalAPI
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import com.yariksoffice.lingver.Lingver
+import org.koin.core.annotation.KoinExperimentalAPI
 
 class App : Application() {
     private val appLifecycleObserver: AppLifecycleObserver by inject()
@@ -21,21 +21,11 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        initWebView()
         initFirebase()
         initKoin()
         initLifecycleObserver()
         initLanguage()
     }
-
-//    private fun initWebView() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//            val processName = getProcessName()
-//            if (packageName != processName) {
-//                WebView.setDataDirectorySuffix(processName)
-//            }
-//        }
-//    }
 
     private fun initFirebase() {
         FirebaseApp.initializeApp(this)
@@ -45,7 +35,7 @@ class App : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@App)
-            androidLogger(Level.DEBUG)
+            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             modules(appComponent)
             fragmentFactory()
         }

@@ -1,36 +1,18 @@
 package ru.adchampagne.test.feature.splash
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import ru.adchampagne.test.Event
-import ru.adchampagne.test.global.dispatcher.error.ErrorHandler
-import ru.adchampagne.test.global.dispatcher.event.EventDispatcher
-import ru.adchampagne.test.global.dispatcher.notifier.Notifier
+import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.take
+import ru.adchampagne.domain.interactor.auth.ObserveAuthStateUseCase
+import ru.adchampagne.test.global.utils.context
 
-class SplashViewModel(
-    private val errorHandler: ErrorHandler,
-    private val notifier: Notifier,
-    private val eventDispatcher: EventDispatcher
-) : ViewModel(), EventDispatcher.EventListener {
-    init {
-        eventDispatcher.addEventListener(Event.SampleEvent::class, this)
-    }
+class SplashViewModel(observeAuthStateUseCase: ObserveAuthStateUseCase) : ViewModel() {
+    val authStateLiveData: LiveData<Boolean> = observeAuthStateUseCase()
+        .take(1)
+        .map { it.orNull() }
+        .map { it?.isLoggedIn == true }
+        .asLiveData(context)
 
-    override fun onCleared() {
-        eventDispatcher.removeEventListener(this)
-        super.onCleared()
-    }
-
-    override fun onEvent(event: Event) {
-        when (event) {
-            is Event.SampleEvent -> {
-                // Can use info from event.field directly without type cast:
-                val x = event.longData
-                val y = event.stringData
-            }
-        }
-    }
-
-    fun onAnimationEnd() {
-        // TODO
-    }
 }

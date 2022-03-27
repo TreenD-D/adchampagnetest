@@ -6,14 +6,26 @@ import ru.adchampagne.test.feature.splash.SplashFlowFragment
 import ru.adchampagne.test.feature.splash.SplashFragment
 import pro.appcraft.lib.navigation.getFragmentScreen
 import com.github.terrakok.cicerone.androidx.ActivityScreen
+import ru.adchampagne.test.feature.auth.AuthFlowFragment
+import ru.adchampagne.test.feature.auth.AuthFragment
+import ru.adchampagne.test.feature.profile.ProfileFlowFragment
+import ru.adchampagne.test.feature.profile.ProfileFragment
 
 object Screens {
     object Flow {
         fun splash() = SplashFlowFragment::class.getFragmentScreen()
+
+        fun auth() = AuthFlowFragment::class.getFragmentScreen()
+
+        fun profile() = ProfileFlowFragment::class.getFragmentScreen()
     }
 
     object Screen {
         fun splash() = SplashFragment::class.getFragmentScreen()
+
+        fun auth() = AuthFragment::class.getFragmentScreen()
+
+        fun profile() = ProfileFragment::class.getFragmentScreen()
     }
 
     // External action intents
@@ -63,19 +75,20 @@ object Screens {
         }
 
         @Suppress("unused")
-        fun shareText(text: String, header: String? = null) = ActivityScreen("actionShareText") { context ->
-            Intent.createChooser(
-                Intent(
-                    Intent.ACTION_SEND
-                ).apply {
-                    putExtra(Intent.EXTRA_TEXT, text)
-                    putExtra("sms_body", text)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
-                    type = "text/plain"
-                },
-                header ?: context.resources.getString(R.string.share)
-            )
-        }
+        fun shareText(text: String, header: String? = null) =
+            ActivityScreen("actionShareText") { context ->
+                Intent.createChooser(
+                    Intent(
+                        Intent.ACTION_SEND
+                    ).apply {
+                        putExtra(Intent.EXTRA_TEXT, text)
+                        putExtra("sms_body", text)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                        type = "text/plain"
+                    },
+                    header ?: context.resources.getString(R.string.share)
+                )
+            }
 
         @Suppress("unused")
         fun shareFile(uri: Uri, mimeType: String) = ActivityScreen("actionShareFile") { context ->

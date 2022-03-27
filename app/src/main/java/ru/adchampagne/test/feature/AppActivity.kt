@@ -35,6 +35,7 @@ import ru.adchampagne.test.global.ui.activity.BaseActivity
 import ru.adchampagne.device.manager.NOTIFICATION_PARAM_METADATA
 import ru.adchampagne.device.manager.NOTIFICATION_PARAM_TYPE
 import ru.adchampagne.domain.model.enums.ContentType
+import ru.adchampagne.test.global.utils.observe
 
 class AppActivity : BaseActivity() {
     private val viewModel: AppViewModel by viewModel()
@@ -78,6 +79,7 @@ class AppActivity : BaseActivity() {
         setContentView(R.layout.activity)
         initWindowFlags()
         updateTaskDescription()
+        initObservers()
         subscribeOnSystemMessages()
 
         if (savedInstanceState == null) {
@@ -108,6 +110,14 @@ class AppActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         currentFocus?.clearFocus()
+    }
+
+    private fun initObservers() {
+        observe(viewModel.loggedInLivedata) { isLoggedIn ->
+            if (!isLoggedIn) {
+                router.newRootScreen(Screens.Flow.auth())
+            }
+        }
     }
 
     private fun subscribeOnSystemMessages() {
