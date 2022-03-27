@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="appPrimary">#3F51B5</color>
+    <color name="appPrimaryVariant">#002984</color>
+    <color name="appSecondary">#EF5350</color>
+    <color name="appSecondaryVariant">#B61825</color>
+
+    <color name="background">#F5F5F6</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#A30000</color>
+    <color name="contentOnBackground">#212121</color>
+    <color name="contentOnSurface">#212121</color>
+    <color name="contentOnColor">#FFFFFF</color>
+
+    <color name="ic_launcher_background">#DDDDDD</color>
+</resources>

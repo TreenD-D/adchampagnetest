@@ -1,0 +1,166 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlinx-serialization'
+    // id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+ext.APK_NAME = 'adchampagnetest'
+
+android {
+    defaultConfig {
+        applicationId "ru.adchampagne.test"
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    signingConfigs {
+        config {
+            storeFile file('../adchampagnetest.jks')
+            keyAlias 'testkey'
+            if (project.hasProperty('PROJECT_KEY_PASSWORD') && project.hasProperty('PROJECT_KEYSTORE_PASSWORD')) {
+                keyPassword PROJECT_KEY_PASSWORD
+                storePassword PROJECT_KEYSTORE_PASSWORD
+            } else {
+                throw new GradleException('Not found signing config password properties')
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+            manifestPlaceholders = [
+                    enableCrashReporting: "false",
+                    usesCleartextTraffic: "true",
+            ]
+        }
+        staging {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            manifestPlaceholders = [
+                    enableCrashReporting: "true",
+                    usesCleartextTraffic: "true",
+            ]
+        }
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            manifestPlaceholders = [
+                    enableCrashReporting: "true",
+                    usesCleartextTraffic: "false",
+            ]
+        }
+    }
+
+    lintOptions {
+        abortOnError true
+        checkAllWarnings true
+        ignoreWarnings false
+        warningsAsErrors false
+        checkDependencies true
+        htmlReport true
+        explainIssues true
+        noLines false
+        textOutput 'stdout'
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${APK_NAME}_${variant.versionName}(${variant.versionCode})_${variant.name}.apk"
+        }
+    }
+
+    afterEvaluate {
+        applicationVariants.all {
+            variant ->
+                def variantName = variant.name.capitalize()
+                if (variantName != 'Debug') {
+                    project.tasks["compile${variantName}Sources"].dependsOn(project.tasks["lint${variantName}"])
+                }
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = ['../resources/src/main/res', 'src/main/res']
+        }
+    }
+    bundle.language.enableSplit = false
+    packagingOptions.exclude("META-INF/*.kotlin_module")
+}
+
+dependencies {
+    implementation project(':data')
+    implementation project(':domain')
+    implementation project(':device')
+    implementation project(':resources')
+
+    // Desugaring
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugaringVersion"
+
+    // AppCraft utils
+    implementation 'com.github.AppCraftTeam:common-utils-android:1.0.8'
+    implementation 'com.github.AppCraftTeam:pagination-utils-android:2.0.1'
+    implementation 'com.github.AppCraftTeam:navigation-utils-android:2.0.2'
+    implementation 'com.github.AppCraftTeam:permissions-utils-android:1.0.2'
+    implementation 'com.github.AppCraftTeam:dialog-utils-android:2.0.4'
+
+    // AndroidX
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation "androidx.viewpager2:viewpager2:1.1.0-beta01"
+    implementation "androidx.annotation:annotation:1.2.0"
+    implementation 'androidx.fragment:fragment-ktx:1.3.6'
+    // MVVM
+    def lifecycleVersion = '2.4.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycleVersion"
+
+    // Single LiveData event
+    implementation "com.github.hadilq.liveevent:liveevent:1.2.0"
+
+    // Coroutines
+    def coroutinesVersion = '1.5.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    // Material
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // Koin DI
+    implementation "io.insert-koin:koin-android:$koinVersion"
+
+    // Cicerone navigation
+    implementation 'com.github.terrakok:cicerone:6.6'
+
+    // FastAdapter
+    def fastAdapterVersion = '5.5.1'
+    implementation "com.mikepenz:fastadapter:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-diff:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-drag:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-scroll:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-swipe:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-ui:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-utils:$fastAdapterVersion"
+
+    // Image loader
+    implementation "io.coil-kt:coil:1.1.1"
+
+    // Firebase
+    implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // Language
+    implementation "com.github.YarikSOffice:lingver:1.3.0"
+}

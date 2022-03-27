@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">adchampagnetest</string>
+
+    <!-- Common system messages -->
+    <string name="double_back_to_exit">Нажмите еще раз для выхода</string>
+    <string name="please_wait">Пожалуйста, подождите…</string>
+    <string name="security_error">Отсутствуют необходимые разрешения</string>
+    <string name="unknown_error">Произошла неизвестная ошибка</string>
+    <string name="server_not_available_error">Сервер временно недоступен</string>
+    <string name="network_error">Отсутствует подключение к сети</string>
+    <string name="not_found_error">Запись не найдена</string>
+    <string name="forbidden_error">Данное действие недоступно</string>
+    <string name="unauthorized_error">Необходимо авторизоваться</string>
+    <string name="internal_server_error">Ошибка на сервере</string>
+    <string name="bad_request_error">Некорректный запрос</string>
+    <string name="message_server_unavailable">Сервер недоступен. Попробуйте запустить приложение позже.</string>
+    <string name="message_technical_works">Извините, в данный момент приложение недоступно. На сервере ведутся технические работы. Попробуйте запустить приложение позже.</string>
+    <string name="message_update_available">Доступно обновление приложения. Рекомендуется установить обновление.</string>
+    <string name="message_update_required">Данная версия приложения устарела. Необходимо установить обновление.</string>
+    <string name="close_app">Закрыть приложение</string>
+    <string name="open_google_play">Перейти в Google Play</string>
+    <string name="continue_without_updating">Продолжить без обновления</string>
+    <string name="btn_ok">Ок</string>
+    <string name="btn_back">Назад</string>
+    <string name="write_on_email">Написать на почту</string>
+    <string name="open_folder">Открыть папку</string>
+    <string name="open_file">Открыть файл</string>
+    <string name="share">Поделиться</string>
+
+    <!-- App strings section -->
+
+</resources>
