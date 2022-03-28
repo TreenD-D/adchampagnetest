@@ -1,17 +1,16 @@
 package ru.adchampagne.device.service
 
-import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import ru.adchampagne.device.manager.NotificationMessageManager
-import ru.adchampagne.domain.global.CoroutineProvider
-import ru.adchampagne.domain.interactor.auth.GetAuthorizationTokenUseCase
-import ru.adchampagne.domain.interactor.notification.RegisterFirebaseTokenUseCase
 import kotlinx.coroutines.launch
 import mu.KotlinLogging
 import org.koin.android.ext.android.inject
 import pro.appcraft.either.AsyncEither
 import pro.appcraft.either.flatMap
+import ru.adchampagne.device.manager.NotificationMessageManager
+import ru.adchampagne.domain.global.CoroutineProvider
+import ru.adchampagne.domain.interactor.auth.GetAuthorizationTokenUseCase
+import ru.adchampagne.domain.interactor.notification.RegisterFirebaseTokenUseCase
 
 private const val ID = "uuid"
 private const val TITLE = "title"

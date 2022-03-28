@@ -29,9 +29,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         //     { activity?.window?.setBackgroundDrawableResource(R.color.colorBackground) },
         //     ANIMATION_DURATION_MS / 2
         // )
-
-        // Navigate to the next screen
-        navigation.newRootFlow(Screens.Flow.auth())
     }
 
     private fun startFirstAnimation() {

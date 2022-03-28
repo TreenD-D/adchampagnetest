@@ -2,6 +2,7 @@ package ru.adchampagne.test.feature.profile
 
 import android.os.Bundle
 import android.view.View
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pro.appcraft.lib.utils.common.addSystemWindowInsetToPadding
 import ru.adchampagne.test.Screens
@@ -21,9 +22,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         view.addSystemWindowInsetToPadding(top = true, bottom = true)
         initListeners()
         initObservers()
+        fragmentScope.launch {
+            //in real case here will be livedata observed from viewmodel
+            binding.profileMailView.text = viewModel.getCurrentUserMail()
+        }
     }
 
     private fun initListeners() {
+        binding.profileLogoutButton.setOnClickListener {
+            viewModel.logout()
+        }
+
 
     }
 

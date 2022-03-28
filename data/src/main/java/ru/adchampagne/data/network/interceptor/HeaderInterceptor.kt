@@ -14,7 +14,7 @@ class HeaderInterceptor(private val prefs: PreferencesWrapper) : Interceptor {
         val request = chain.request()
         val requestBuilder = request.newBuilder()
         requestBuilder.removeHeader(AUTHORIZATION)
-        if (prefs.authToken.get().isNotBlank()) {
+        if (prefs.authToken.get()!!.isNotBlank()) {
             requestBuilder.addHeader(
                 AUTHORIZATION,
                 TOKEN_TEMPLATE.format(prefs.authToken.get())

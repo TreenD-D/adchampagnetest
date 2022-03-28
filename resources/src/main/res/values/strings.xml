@@ -34,6 +34,14 @@
     <string name="auth_register_button">Регистрация</string>
     <string name="profile_title">Профиль</string>
     <string name="profile_logout_button">Выйти</string>
+    <string name="required_field_error">Обязательное поле</string>
+    <string name="error_invalid_mail">Некорректный адрес</string>
+    <string name="message_auth_invalid">Неверно введен логин или пароль</string>
+    <string name="message_register_failed">Ошибка создания записи</string>
+    <string name="message_recover_failed">Ошибка восстановления пароля</string>
+    <string name="recover_no_mail">Нет аккаунта с такой почтой</string>
+    <string name="recover_success">Успешный сброс</string>
+    <string name="message_register_duplicate">Пользователь с такой почтой уже существует</string>
 
     <!-- App strings section -->
 

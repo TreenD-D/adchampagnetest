@@ -14,6 +14,6 @@ internal val viewModelModule = module {
 
     viewModel { SplashViewModel(get()) }
 
-    viewModel { AuthViewModel(get(), get()) }
-    viewModel { ProfileViewModel(get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get(), get()) }
 }

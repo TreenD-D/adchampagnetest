@@ -1,5 +1,5 @@
 package ru.adchampagne.domain.model.auth
 
-class AuthState (
+data class AuthState (
     val isLoggedIn: Boolean
 )

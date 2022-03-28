@@ -7,7 +7,7 @@ import ru.adchampagne.domain.gateway.NotificationGateway
 import org.koin.dsl.module
 
 internal val gatewayModule = module {
-    single<AuthGateway> { AuthGatewayImpl(get()) }
+    single<AuthGateway> { AuthGatewayImpl(get(), get()) }
 
     single<NotificationGateway> { NotificationGatewayImpl(get(), get()) }
 }

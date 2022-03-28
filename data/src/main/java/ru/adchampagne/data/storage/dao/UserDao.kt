@@ -12,7 +12,7 @@ interface UserDao {
     suspend fun getEntity(id: Long): UserEntity
 
     @Query("SELECT * FROM users WHERE mail=:mail LIMIT 1")
-    suspend fun getEntityByMail(mail: String): UserEntity
+    suspend fun getEntityByMail(mail: String): UserEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun add(user: UserEntity): Long
